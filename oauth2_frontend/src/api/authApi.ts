@@ -2,7 +2,7 @@ import axios, {AxiosError} from "axios";
 import type { SignupRequest, LoginRequest, AuthResponse } from "../types/auth";
 
 const api = axios.create ({
-  baseURL: 'http://localhost:8080k]',
+  baseURL: 'http://localhost:8080',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ api.interceptors.request.use(
   config => {
     const token = localStorage.getItem('jwt_token');
     if(token) {
-      config.headers.Authorization = `Bearer $[token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -48,7 +48,7 @@ export const loginApi = async (data: LoginRequest) : Promise<AuthResponse> => {
 };
 // 구글 로그인 redirecting 적용하기 때문에 일반 username / password 방식과 다릅니다.
 export const startGoogleLogin = () : void => {
-  window.location.href = 'http://loacalhost:8080/oauth2/authorization/google';
+  window.location.href = 'http://localhost:8080/oauth2/authorization/google';
 };
 
 export default api;
